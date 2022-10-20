@@ -13,6 +13,6 @@ public interface CinemaService {
 
     List<CinemaDto> getAllCinema();
     CinemaDto getCinema(String cinemaId);
-    Incassi getIncassoCinema(String cinemaId, Timestamp dataIncasso);
+    Incassi getIncassoCinema(String cinemaId);
     CinemaDto createCinema(CinemaDto cinemaNew);
 }
