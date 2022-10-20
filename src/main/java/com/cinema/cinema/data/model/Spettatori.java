@@ -1,13 +1,12 @@
 package com.cinema.cinema.data.model;
 
-import com.cinema.cinema.data.archetype.Dto;
 import com.cinema.cinema.data.archetype.Model;
 import com.cinema.cinema.data.dto.SpettatoriDto;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Table(name = "spettatori")
 @Entity
@@ -24,20 +23,21 @@ public class Spettatori implements Model {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String spettatoreId;
 
-    @Column(name = "id_biglietto")
-    private String bigliettoId;
+    @ManyToOne(targetEntity = Biglietti.class)
+    @JoinColumn(name = "id_biglietto")
+    private Biglietti biglietto;
 
     private String cognome;
     private String nome;
 
     @Column(name = "data_di_nascita")
-    private Timestamp dataNascita;
+    private LocalDate dataNascita;
 
     @Override
     public SpettatoriDto toDto() {
         return SpettatoriDto.builder()
                 .spettatoreId(spettatoreId)
-                .bigliettoId(bigliettoId)
+                .biglietto(biglietto.toDto())
                 .cognome(cognome)
                 .nome(nome)
                 .dataNascita(dataNascita)

@@ -1,6 +1,5 @@
 package com.cinema.cinema.data.model;
 
-import com.cinema.cinema.data.archetype.Dto;
 import com.cinema.cinema.data.archetype.Model;
 import com.cinema.cinema.data.dto.FilmsDto;
 import lombok.*;
@@ -23,8 +22,9 @@ public class Films implements Model {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String filmId;
 
-    @Column(name = "id_sala")
-    private String salaId;
+    @ManyToOne(targetEntity = Sale.class)
+    @JoinColumn(name = "id_sala")
+    private Sale sala;
 
     private String titolo;
 
@@ -46,7 +46,7 @@ public class Films implements Model {
     public FilmsDto toDto() {
         return FilmsDto.builder()
                 .filmId(filmId)
-                .salaId(salaId)
+                .sala(sala.toDto())
                 .titolo(titolo)
                 .genere(genere)
                 .registaId(registaId)

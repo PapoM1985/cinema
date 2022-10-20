@@ -1,6 +1,5 @@
 package com.cinema.cinema.data.model;
 
-import com.cinema.cinema.data.archetype.Dto;
 import com.cinema.cinema.data.archetype.Model;
 import com.cinema.cinema.data.dto.BigliettiDto;
 import lombok.*;
@@ -23,8 +22,9 @@ public class Biglietti implements Model {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String bigliettoId;
 
-    @Column(name = "id_film")
-    private String filmId;
+    @ManyToOne(targetEntity = Films.class)
+    @JoinColumn(name = "id_film")
+    private Films film;
 
     private String posto;
 
@@ -34,7 +34,7 @@ public class Biglietti implements Model {
     public BigliettiDto toDto() {
         return BigliettiDto.builder()
                 .bigliettoId(bigliettoId)
-                .filmId(filmId)
+                .film(film.toDto())
                 .posto(posto)
                 .prezzo(prezzo)
                 .build();

@@ -1,6 +1,5 @@
 package com.cinema.cinema.data.model;
 
-import com.cinema.cinema.data.archetype.Dto;
 import com.cinema.cinema.data.archetype.Model;
 import com.cinema.cinema.data.dto.SaleDto;
 import lombok.*;
@@ -23,22 +22,34 @@ public class Sale implements Model {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String salaId;
 
-    @Column(name = "id_cinema")
-    private String cinemaId;
+    @ManyToOne(targetEntity = Sale.class)
+    @JoinColumn(name = "id_cinema")
+    private Cinema cinema;
+
+    private String nome;
 
     @Column(name = "posti_disponibili")
-    private String postiDisponibili;
+    private Integer postiDisponibili;
 
     @Column(name = "posti_totali")
-    private String postiTotali;
+    private Integer postiTotali;
+
+    @Column(name = "file_disponibili")
+    private Integer file;
+
+    @Column(name = "posti_per_fila")
+    private Integer postiFila;
 
     @Override
     public SaleDto toDto() {
         return SaleDto.builder()
                 .salaId(salaId)
-                .cinemaId(cinemaId)
+                .cinema(cinema.toDto())
                 .postiDisponibili(postiDisponibili)
                 .postiTotali(postiTotali)
+                .nome(nome)
+                .file(file)
+                .postiFila(postiFila)
                 .build();
     }
 }
