@@ -15,6 +15,7 @@ public class BigliettiDto implements Dto {
     private String bigliettoId;
 
     private FilmsDto film;
+    private SpettatoriDto spettatore;
 
     private String posto;
 
@@ -27,6 +28,7 @@ public class BigliettiDto implements Dto {
                 .film(film.toModel())
                 .posto(posto)
                 .prezzo(prezzo)
+                .spettatore(spettatore.toModel())
                 .build();
     }
 }

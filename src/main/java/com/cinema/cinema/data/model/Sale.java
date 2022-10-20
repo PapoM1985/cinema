@@ -22,7 +22,7 @@ public class Sale implements Model {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String salaId;
 
-    @ManyToOne(targetEntity = Sale.class)
+    @ManyToOne(targetEntity = Cinema.class)
     @JoinColumn(name = "id_cinema")
     private Cinema cinema;
 

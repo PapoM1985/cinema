@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1666263764017-1" author="Utente (generated)">
+    <changeSet id="1666274178222-1" author="Utente (generated)">
         <createTable tableName="biglietti">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -13,9 +13,10 @@
             <column name="id_film" type="VARCHAR(64)"/>
             <column name="posto" type="VARCHAR(64)"/>
             <column name="prezzo" type="DOUBLE"/>
+            <column name="id_spettatore" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-2" author="Utente (generated)">
+    <changeSet id="1666274178222-2" author="Utente (generated)">
         <createTable tableName="cinema">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -25,7 +26,7 @@
             <column name="citta" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-3" author="Utente (generated)">
+    <changeSet id="1666274178222-3" author="Utente (generated)">
         <createTable tableName="films">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -40,7 +41,7 @@
             <column name="genere" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-4" author="Utente (generated)">
+    <changeSet id="1666274178222-4" author="Utente (generated)">
         <createTable tableName="produttori">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -48,7 +49,7 @@
             <column name="nome" type="VARCHAR(64)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-5" author="Utente (generated)">
+    <changeSet id="1666274178222-5" author="Utente (generated)">
         <createTable tableName="registi">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -58,7 +59,7 @@
             <column name="cognome" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-6" author="Utente (generated)">
+    <changeSet id="1666274178222-6" author="Utente (generated)">
         <createTable tableName="sale">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -71,66 +72,80 @@
             <column name="nome" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-7" author="Utente (generated)">
+    <changeSet id="1666274178222-7" author="Utente (generated)">
         <createTable tableName="spettatori">
             <column name="id" type="VARCHAR(64)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="id_biglietto" type="VARCHAR(64)"/>
             <column name="cognome" type="VARCHAR(64)"/>
             <column name="nome" type="VARCHAR(64)"/>
             <column name="data_di_nascita" type="timestamp"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666263764017-8" author="Utente (generated)">
+    <changeSet id="1666274178222-8" author="Utente (generated)">
         <createIndex indexName="fk_cinema_idx" tableName="sale">
             <column name="id_cinema"/>
         </createIndex>
     </changeSet>
-    <changeSet id="1666263764017-9" author="Utente (generated)">
+    <changeSet id="1666274178222-9" author="Utente (generated)">
+        <createIndex indexName="fk_film" tableName="biglietti">
+            <column name="id_film"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1666274178222-10" author="Utente (generated)">
         <createIndex indexName="fk_id_produttore_idx" tableName="films">
             <column name="id_produttore"/>
         </createIndex>
     </changeSet>
-    <changeSet id="1666263764017-10" author="Utente (generated)">
+    <changeSet id="1666274178222-11" author="Utente (generated)">
         <createIndex indexName="fk_registi_idx" tableName="films">
             <column name="id_regista"/>
         </createIndex>
     </changeSet>
-    <changeSet id="1666263764017-11" author="Utente (generated)">
+    <changeSet id="1666274178222-12" author="Utente (generated)">
         <createIndex indexName="fk_sala_idx" tableName="films">
             <column name="id_sala"/>
         </createIndex>
     </changeSet>
-    <changeSet id="1666263764017-12" author="Utente (generated)">
-        <addForeignKeyConstraint baseColumnNames="id" baseTableName="spettatori" constraintName="fk_biglietto"
-                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id"
-                                 referencedTableName="biglietti"/>
+    <changeSet id="1666274178222-13" author="Utente (generated)">
+        <createIndex indexName="fk_spettatore_idx" tableName="biglietti">
+            <column name="id_spettatore"/>
+        </createIndex>
     </changeSet>
-    <changeSet id="1666263764017-13" author="Utente (generated)">
+    <changeSet id="1666274178222-14" author="Utente (generated)">
+        <addForeignKeyConstraint baseColumnNames="id_cinema" baseTableName="sale"
+                                 constraintName="FKeoph9ejpjfmavtsjrn20sdeis" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="sale"/>
+    </changeSet>
+    <changeSet id="1666274178222-15" author="Utente (generated)">
         <addForeignKeyConstraint baseColumnNames="id_cinema" baseTableName="sale" constraintName="fk_cinema"
                                  onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id"
                                  referencedTableName="cinema"/>
     </changeSet>
-    <changeSet id="1666263764017-14" author="Utente (generated)">
-        <addForeignKeyConstraint baseColumnNames="id" baseTableName="biglietti" constraintName="fk_film"
+    <changeSet id="1666274178222-16" author="Utente (generated)">
+        <addForeignKeyConstraint baseColumnNames="id_film" baseTableName="biglietti" constraintName="fk_film"
                                  onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id"
                                  referencedTableName="films"/>
     </changeSet>
-    <changeSet id="1666263764017-15" author="Utente (generated)">
+    <changeSet id="1666274178222-17" author="Utente (generated)">
         <addForeignKeyConstraint baseColumnNames="id_produttore" baseTableName="films" constraintName="fk_produttore"
                                  onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id"
                                  referencedTableName="produttori"/>
     </changeSet>
-    <changeSet id="1666263764017-16" author="Utente (generated)">
+    <changeSet id="1666274178222-18" author="Utente (generated)">
         <addForeignKeyConstraint baseColumnNames="id_regista" baseTableName="films" constraintName="fk_registi"
                                  onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id"
                                  referencedTableName="registi"/>
     </changeSet>
-    <changeSet id="1666263764017-17" author="Utente (generated)">
+    <changeSet id="1666274178222-19" author="Utente (generated)">
         <addForeignKeyConstraint baseColumnNames="id_sala" baseTableName="films" constraintName="fk_sala"
                                  onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id"
                                  referencedTableName="sale"/>
+    </changeSet>
+    <changeSet id="1666274178222-20" author="Utente (generated)">
+        <addForeignKeyConstraint baseColumnNames="id_spettatore" baseTableName="biglietti"
+                                 constraintName="fk_spettatore" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedColumnNames="id" referencedTableName="spettatori"/>
     </changeSet>
 
 </databaseChangeLog>

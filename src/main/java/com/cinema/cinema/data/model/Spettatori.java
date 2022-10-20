@@ -23,10 +23,6 @@ public class Spettatori implements Model {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String spettatoreId;
 
-    @ManyToOne(targetEntity = Biglietti.class)
-    @JoinColumn(name = "id_biglietto")
-    private Biglietti biglietto;
-
     private String cognome;
     private String nome;
 
@@ -37,7 +33,6 @@ public class Spettatori implements Model {
     public SpettatoriDto toDto() {
         return SpettatoriDto.builder()
                 .spettatoreId(spettatoreId)
-                .biglietto(biglietto.toDto())
                 .cognome(cognome)
                 .nome(nome)
                 .dataNascita(dataNascita)

@@ -26,6 +26,10 @@ public class Biglietti implements Model {
     @JoinColumn(name = "id_film")
     private Films film;
 
+    @ManyToOne(targetEntity = Spettatori.class)
+    @JoinColumn(name = "id_spettatore")
+    private Spettatori spettatore;
+
     private String posto;
 
     private Double prezzo;
@@ -36,6 +40,7 @@ public class Biglietti implements Model {
                 .bigliettoId(bigliettoId)
                 .film(film.toDto())
                 .posto(posto)
+                .spettatore(spettatore.toDto())
                 .prezzo(prezzo)
                 .build();
     }

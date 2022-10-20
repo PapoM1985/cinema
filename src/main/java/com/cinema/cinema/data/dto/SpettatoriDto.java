@@ -17,7 +17,6 @@ import java.time.Period;
 public class SpettatoriDto implements Dto {
 
     private String spettatoreId;
-    private BigliettiDto biglietto;
     private String cognome;
     private String nome;
     private LocalDate dataNascita;
@@ -38,7 +37,6 @@ public class SpettatoriDto implements Dto {
     public Spettatori toModel() {
         return Spettatori.builder()
                 .spettatoreId(spettatoreId)
-                .biglietto(biglietto.toModel())
                 .cognome(cognome)
                 .nome(nome)
                 .dataNascita(dataNascita)
