@@ -16,7 +16,6 @@ public interface CinemaRepository extends JpaRepository<Cinema,String> {
             " INNER JOIN films f ON l.id_sala = s.id " +
             " INNER JOIN biglietti b ON b.id_film = f.id " +
             " WHERE c.id = :cinemaId " +
-            " AND  (DATE(:dataIncasso) IS NULL OR DATE(f.data_proiezione) = DATE(:dataIncasso))  " +
             " GROUP BY c.nome",nativeQuery = true)
-    Incassi incassoCinema(String cinemaId, Timestamp dataIncasso);
+    Incassi incassoCinema(String cinemaId);
 }
