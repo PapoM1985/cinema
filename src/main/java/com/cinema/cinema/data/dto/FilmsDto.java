@@ -1,7 +1,6 @@
 package com.cinema.cinema.data.dto;
 
 import com.cinema.cinema.data.archetype.Dto;
-import com.cinema.cinema.data.archetype.Model;
 import com.cinema.cinema.data.model.Films;
 import lombok.*;
 
@@ -14,7 +13,7 @@ public class FilmsDto implements Dto {
 
     private String filmId;
 
-    private String salaId;
+    private SaleDto sala;
 
     private String titolo;
 
@@ -32,7 +31,7 @@ public class FilmsDto implements Dto {
     public Films toModel() {
         return Films.builder()
                 .filmId(filmId)
-                .salaId(salaId)
+                .sala(sala.toModel())
                 .titolo(titolo)
                 .genere(genere)
                 .registaId(registaId)

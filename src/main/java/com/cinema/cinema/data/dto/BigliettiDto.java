@@ -2,7 +2,6 @@ package com.cinema.cinema.data.dto;
 
 
 import com.cinema.cinema.data.archetype.Dto;
-import com.cinema.cinema.data.archetype.Model;
 import com.cinema.cinema.data.model.Biglietti;
 import lombok.*;
 
@@ -15,7 +14,7 @@ public class BigliettiDto implements Dto {
 
     private String bigliettoId;
 
-    private String filmId;
+    private FilmsDto film;
 
     private String posto;
 
@@ -25,7 +24,7 @@ public class BigliettiDto implements Dto {
     public Biglietti toModel() {
         return Biglietti.builder()
                 .bigliettoId(bigliettoId)
-                .filmId(filmId)
+                .film(film.toModel())
                 .posto(posto)
                 .prezzo(prezzo)
                 .build();
